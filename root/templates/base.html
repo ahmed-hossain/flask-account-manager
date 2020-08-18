@@ -21,6 +21,41 @@
     </title>
   </head>
   <body>
+    
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="{{ url_for('main.home') }}">FLAK<span class="text-primary">OUNT</span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menu">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item mr-1">
+              <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
+            </li>
+            <li class="nav-item mx-md-1">
+              <a class="btn btn-primary" href="{{ url_for('auth.register') }}">Register</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Flashed Message -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    <section class="container">
+      {% for category, message in messages %}
+      <div class="alert alert-{{ category }} alert-dismissible fade show mt-2" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {% endfor %}
+    </section>
+    {% endwith %}
+
     <!-- Main content to be inserted -->
     {% block content %}{% endblock %}
 
