@@ -1,29 +1,43 @@
 {% extends 'base.html' %}
+{% macro error_text(field) -%}
+    {% for error in field.errors %}
+        <small class='text-danger'>{{ error }}</small>
+    {% endfor %}
+{%- endmacro %}
+
 
 {% block content %}
 <div class="container pt-5">
     <div class="row">
         <div class="col-md-6 col-lg-4 mx-auto card">
             <div class="card-body">
-                <h1 class="card-title">Login</h1>
+                <h1 class="card-title">Create account</h1>
                 <form action="" method="post">
                     {{ form.hidden_tag() }}
                     <div class="form-group">
                         <label for="">{{ form.username.label }}</label>
                         {{ form.username(class='form-control')}}
+                        {{ error_text(form.username) }}
+                    </div>
+                    <div class="form-group">
+                        <label for="">{{ form.email.label }}</label>
+                        {{ form.email(class='form-control')}}
+                        {{ error_text(form.email) }}
                     </div>
                     <div class="form-group">
                         <label for="">{{ form.password.label }}</label>
                         {{ form.password(class='form-control')}}
+                        {{ error_text(form.password) }}
                     </div>
-                    <div class="form-check">
-                        {{ form.remember_me(class='form-check-input')}}
-                        <label for="">{{ form.remember_me.label }}</label>
+                    <div class="form-group">
+                        <label for="">{{ form.password_2.label }}</label>
+                        {{ form.password_2(class='form-control') }}
+                        {{ error_text(form.password_2) }}
                     </div>
                     {{ form.submit(class='btn btn-primary') }}
                 </form>
                 <p class="mt-2">
-                    Don't have an account? <a href="{{ url_for('auth.register') }}">Create an account</a>
+                    Already have an account? <a href="{{ url_for('auth.login') }}">Login</a>
                 </p>
             </div>
         </div>

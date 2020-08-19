@@ -6,8 +6,8 @@ from flask_migrate import Migrate
 
 
 # Initialize all the flask extention
-#login = LoginManager()
-#login.login_view = 'auth.login'
+login = LoginManager()
+login.login_view = 'auth.login'
 db = SQLAlchemy()
 migrate = Migrate()
 
@@ -18,10 +18,9 @@ app.config.from_object(Config)
 
 
 # Register the app to the extentions
-#login.init_app(app)
+login.init_app(app)
 db.init_app(app)
-migrate.init_app(app)
-
+migrate.init_app(app, db)
 
 
 # Register all the blueprints
